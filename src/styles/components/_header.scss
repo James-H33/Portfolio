@@ -1,0 +1,20 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 40px;
+
+  app-nav-link a {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .header-links {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: end;
+
+    app-nav-link {
+      margin-left: 1em;
+    }
+  }
+}
