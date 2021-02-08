@@ -1,20 +1,39 @@
 .header {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
   padding: 40px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
 
   app-nav-link a {
+    color: white;
     font-size: 24px;
-    font-weight: bold;
+
+    @media screen and (min-width: $mobile) {
+      color: $primary-text-color;
+    }
   }
 
   .header-links {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: end;
+    display: none;
+
+    @media screen and (min-width: $mobile) {
+      display: grid;
+      color: $primary-text-color;
+      grid-template-columns: auto auto;
+      justify-content: end;
+    }
 
     app-nav-link {
-      margin-left: 1em;
+      margin-left: 3em;
+
+      a {
+        font-size: 18px;
+      }
     }
   }
 }
