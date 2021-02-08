@@ -1,6 +1,7 @@
 .header {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
   padding: 40px;
   position: absolute;
   left: 0;
@@ -18,12 +19,21 @@
   }
 
   .header-links {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: end;
+    display: none;
+
+    @media screen and (min-width: $mobile) {
+      display: grid;
+      color: $primary-text-color;
+      grid-template-columns: auto auto;
+      justify-content: end;
+    }
 
     app-nav-link {
-      margin-left: 1em;
+      margin-left: 3em;
+
+      a {
+        font-size: 18px;
+      }
     }
   }
 }
