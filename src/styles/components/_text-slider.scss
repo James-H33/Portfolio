@@ -1,0 +1,9 @@
+.text-slider {
+  overflow-y: hidden;
+  position: relative;
+
+  .text-slider-wrapper {
+    position: absolute;
+    transition: 500ms ease;
+  }
+}

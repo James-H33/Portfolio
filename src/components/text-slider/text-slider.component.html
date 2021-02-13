@@ -1,0 +1,7 @@
+<div #Slider class="text-slider" (click)="slide()">
+  <div #SliderTextWrapper class="text-slider-wrapper">
+    <div #SliderText *ngFor="let value of values">
+      {{value}}
+    </div>
+  </div>
+</div>

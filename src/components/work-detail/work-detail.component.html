@@ -1,0 +1,33 @@
+<div class="work">
+  <div class="work-item-slider">
+    <div class="work-item-slide-wrapper">
+      <div class="work-item-slide" [ngStyle]="{ backgroundImage: 'url(' + '../../assets/images/ncrs.png)' }"></div>
+    </div>
+
+    <div class="work-item-slide-wrapper">
+      <div class="work-item-slide" [ngStyle]="{ backgroundImage: 'url(' + '../../assets/images/camping-1.png)' }"></div>
+    </div>
+
+    <div class="work-item-slide-wrapper">
+      <div class="work-item-slide" [ngStyle]="{ backgroundImage: 'url(' + '../../assets/images/camping-1.png)' }"></div>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <div class="work-item-title">
+      <app-text-slider
+        [direction]="direction"
+        [textSize]="68"
+        [values]="titles">
+      </app-text-slider>
+    </div>
+
+    <div class="work-item-description">
+      <app-text-slider
+        [direction]="direction"
+        [textSize]="16"
+        [values]="descriptions">
+      </app-text-slider>
+    </div>
+  </div>
+</div>
