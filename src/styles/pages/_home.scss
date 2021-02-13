@@ -1,70 +1,77 @@
 .home {
-  height: 100vh;
-  display: grid;
-  grid-template-areas: 'HomeContent';
-  grid-template-columns: 1fr;
-  position: relative;
-  background-color: black;
 
-  @media screen and (min-width: $mobile) {
-    grid-template-areas: 'HomeInfo HomePicture';
-    grid-template-columns: 1fr 1fr;
-    background: url('../../assets/images/waves.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-color: #ddd;
-  }
-
-  .home-info {
-    grid-area: HomeContent;
+  .home-intro {
+    height: 100vh;
     display: grid;
-    align-content: end;
-    padding: 40px;
-    z-index: 1;
-    margin-bottom: 5em;
+    grid-template-areas: 'HomeContent';
+    grid-template-columns: 1fr;
+    position: relative;
+    background-color: black;
 
     @media screen and (min-width: $mobile) {
-      grid-area: HomeInfo;
-      align-content: center;
-      margin-bottom: 0;
+      grid-template-areas: 'HomeInfo HomePicture';
+      grid-template-columns: 1fr 1fr;
+      background: url('../../assets/images/waves.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position-y: bottom;
+      background-color: #fdfdfd;
     }
 
-    h1 {
-      color: white;
-      font-size: 48px;
-      line-height: 40px;
+    .home-info {
+      grid-area: HomeContent;
+      display: grid;
+      align-content: end;
+      padding: 40px;
+      z-index: 1;
+      margin-bottom: 5em;
 
       @media screen and (min-width: $mobile) {
-        color: $primary-text-color;
-        font-size: 89px;
-        line-height: 80px;
+        grid-area: HomeInfo;
+        align-content: center;
+        margin-bottom: 0;
+      }
+
+      h1 {
+        color: white;
+        font-size: 48px;
+        line-height: 40px;
+
+        @media screen and (min-width: $mobile) {
+          color: $primary-text-color;
+          font-size: 89px;
+          line-height: 80px;
+        }
+      }
+
+      .home-hello {
+        font-size: 20px;
+        color: #B54F4F;
+        margin-bottom: 10px;
+        margin-left: 5px;
       }
     }
 
-    .home-hello {
-      font-size: 20px;
-      color: #B54F4F;
-      margin-bottom: 10px;
-      margin-left: 5px;
-    }
-  }
-
-  .home-picture {
-    grid-area: HomeContent;
-    height: 100vh;
-    background: url('../../assets/images/profile-dark.png');
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-position-x: right;
-
-    @media screen and (min-width: $mobile) {
-      grid-area: HomePicture;
-      background: url('../../assets/images/profile.png');
+    .home-picture {
+      grid-area: HomeContent;
+      height: 100vh;
+      background: url('../../assets/images/profile-dark.png');
+      background-size: auto;
       background-repeat: no-repeat;
       background-position-y: bottom;
       background-position-x: right;
+
+      @media screen and (min-width: $mobile) {
+        grid-area: HomePicture;
+        background: url('../../assets/images/profile.png');
+        background-repeat: no-repeat;
+        background-position-y: bottom;
+        background-position-x: right;
+      }
     }
+  }
+
+  .home-work {
+    // height: 100vh;
   }
 }
