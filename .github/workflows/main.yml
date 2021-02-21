@@ -17,6 +17,8 @@ jobs:
         run: npm install
       - name: Build Project
         run: npm run build:prod
+      - name: Add .nojekyll file
+        run: touch dist/Portfolio/.nojekyll
       - name: Push dist to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
