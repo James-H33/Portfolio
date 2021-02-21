@@ -1,5 +1,7 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ScrollDirection } from 'src/models';
+import { PageScrollerService } from 'src/services/page-scroller.service';
 
 @Component({
   selector: 'app-work-detail',
@@ -11,7 +13,8 @@ export class WorkDetailComponent implements OnInit {
   constructor(
     private elRef: ElementRef,
     @Inject('Document') private doc: Document,
-    @Inject('Window') private window: Window,
+    @Inject('Window') private windowRef: Window,
+    private pageScrollerService: PageScrollerService
   ) { }
 
   public titles = [
@@ -26,18 +29,70 @@ export class WorkDetailComponent implements OnInit {
     'Javascript - Node - Express'
   ];
 
+  public get slider(): HTMLElement {
+    return this.elRef.nativeElement.querySelector('.work-item-slider');
+  }
+
+  public get windowHeight(): number {
+    return this.windowRef.innerHeight;
+  }
+
+  public get totalContentHeight(): number {
+    return this.titles.length * this.windowRef.innerHeight;
+  }
+
   ngOnInit(): void {
-    this.window.addEventListener('scroll', (e: any) => {
-      // console.log(this.elRef.nativeElement.offsetTop);
-      // console.log(e.target.documentElement.scrollTop);
-      if (this.elRef.nativeElement.offsetTop === e.target.documentElement.scrollTop) {
-        this.onScroll();
+    let touchStartPosition = 0;
+    let touchMovePosition = 0;
+    let lastTop = 0;
+    let distanceMoved = 0;
+
+    this.windowRef.addEventListener('touchstart', (event) => {
+      console.log('TouchStart');
+      this.slider.style.transition = 'unset';
+      touchStartPosition = event.changedTouches[0].pageY;
+    });
+
+    this.windowRef.addEventListener('touchmove', (event) => {
+      touchMovePosition = event.changedTouches[0].pageY;
+      distanceMoved = lastTop + (touchStartPosition - touchMovePosition);
+      this.slider.style.transform = `translateY(-${distanceMoved}px)`;
+    });
+
+    this.windowRef.addEventListener('touchend', () => {
+      console.log('touchend');
+      let nextTop = 0;
+      let direction;
+
+      if (Math.abs(distanceMoved - lastTop) > 75) {
+        if (distanceMoved < lastTop) {
+          nextTop = lastTop - this.windowHeight;
+          direction = ScrollDirection.Up;
+        } else {
+          nextTop = lastTop + this.windowHeight;
+          direction = ScrollDirection.Down;
+        }
+
+        const isAtTop = nextTop < 0;
+        const isAtBottom = nextTop >= this.totalContentHeight;
+        const isAtBounds = isAtTop || isAtBottom;
+
+        if (!isAtBounds) {
+          this.onScroll(direction);
+        }
+
+        nextTop = isAtBounds ? lastTop : nextTop;
+        lastTop = nextTop;
+      } else {
+        nextTop = lastTop;
       }
+
+      this.slider.style.transition = '1000ms ease';
+      this.slider.style.transform = `translateY(-${nextTop}px)`;
     });
   }
 
-  public onScroll() {
-    console.log('Scrolling');
-    this.direction.next('down');
+  public onScroll(direction: ScrollDirection): void {
+    this.direction.next(direction);
   }
 }

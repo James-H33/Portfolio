@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ScrollDirection } from 'src/models';
 
 @Component({
   selector: 'app-text-slider',
@@ -19,8 +20,6 @@ export class TextSliderComponent implements OnInit {
 
   public ngOnInit(): void {
     setTimeout(() => {
-      console.log(this.sliderText);
-
       const height = this.textSize + (this.textSize * .20);
       this.slider.nativeElement.style.height = `${height}px`;
       this.sliderTextWrapper.nativeElement.style.top = 0;
@@ -33,17 +32,19 @@ export class TextSliderComponent implements OnInit {
     }, 1000);
 
     if (this.direction) {
-      this.direction.subscribe((dir: any) => {
-        this.slide();
-      });
+      this.direction.subscribe((dir: any) => this.slide(dir));
     }
   }
 
-  public slide() {
-    this.slideDown();
+  public slide(dir: ScrollDirection): void {
+    if (ScrollDirection.Down) {
+      this.slideDown();
+    } else {
+      this.slideUp();
+    }
   }
 
-  public slideUp() {
+  public slideUp(): void {
     const heightOfOneSection = this.textSize + (this.textSize * .20);
 
     if (this.currentIndex - 1 === 0) {
@@ -54,7 +55,7 @@ export class TextSliderComponent implements OnInit {
     }
   }
 
-  public slideDown() {
+  public slideDown(): void {
     const heightOfOneSection = this.textSize + (this.textSize * .20);
     if (this.currentIndex + 1 <= (this.values.length  - 1)) {
       ++this.currentIndex;

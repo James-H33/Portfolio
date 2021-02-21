@@ -2,7 +2,8 @@
 
   .home-intro {
     height: 100vh;
-    display: grid;
+    // display: grid;
+    display: none;
     grid-template-areas: 'HomeContent';
     grid-template-columns: 1fr;
     position: relative;

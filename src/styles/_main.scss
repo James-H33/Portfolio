@@ -3,6 +3,11 @@
   margin: 0;
 }
 
+html,
+body {
+  overflow: hidden; // needed
+}
+
 body {
   font-family: 'Roboto';
 }
