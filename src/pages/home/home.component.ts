@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { ScrollDirection } from 'src/models';
+import { PageScrollerService } from 'src/services/page-scroller.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +8,15 @@ import { ScrollDirection } from 'src/models';
 })
 export class HomeComponent implements OnInit {
   public isScrolling = false;
+  public sliderPosition = 0;
+  public minSliderPosition = 0;
+  public maxSliderPosition = 3;
 
   constructor(
     private elRef: ElementRef,
     @Inject('Document') private doc: Document,
     @Inject('Window') private windowRef: Window,
+    private pageScrollerService: PageScrollerService
   ) { }
 
   public get isMobile(): boolean {
@@ -21,6 +25,10 @@ export class HomeComponent implements OnInit {
 
   public get homeSlider(): HTMLElement {
     return this.elRef.nativeElement.querySelector('.home');
+  }
+
+  public get textSlider(): HTMLElement {
+    return this.elRef.nativeElement.querySelector('.text-slider');
   }
 
   public get windowHeight(): number {
@@ -49,14 +57,13 @@ export class HomeComponent implements OnInit {
 
     this.windowRef.addEventListener('wheel', (event: any) => {
       const delta = event.wheelDelta;
-      let direction: any;
       let nextTop = 0;
 
       if (isScrolling) {
         return;
       }
 
-      if (Math.abs(delta) < 80) {
+      if (!this.isMoveThresholdMet(delta)) {
         return;
       }
 
@@ -64,7 +71,7 @@ export class HomeComponent implements OnInit {
         isScrolling = true;
         nextTop = lastTop + this.windowHeight;
         lastTop = nextTop;
-        direction = ScrollDirection.Down;
+        this.sliderPosition++;
 
         return this.moveSlider(nextTop, () => {
           setTimeout(() => {
@@ -73,12 +80,11 @@ export class HomeComponent implements OnInit {
         });
       }
 
-
       if (delta > 0 && (lastTop - this.windowHeight >= 0)) {
         isScrolling = true;
         nextTop = lastTop - this.windowHeight;
         lastTop = nextTop;
-        direction = ScrollDirection.Up;
+        this.sliderPosition--;
 
         return this.moveSlider(nextTop, () => {
           setTimeout(() => {
@@ -108,24 +114,19 @@ export class HomeComponent implements OnInit {
 
     this.windowRef.addEventListener('touchend', () => {
       let nextTop = 0;
-      let direction;
 
-      if (Math.abs(distanceMoved - lastTop) > 75) {
+      if (distanceMoved !== 0 && this.isMoveThresholdMet(distanceMoved - lastTop)) {
         if (distanceMoved < lastTop) {
           nextTop = lastTop - this.windowHeight;
-          direction = ScrollDirection.Up;
+          this.setSliderPostion(--this.sliderPosition);
         } else {
           nextTop = lastTop + this.windowHeight;
-          direction = ScrollDirection.Down;
+          this.setSliderPostion(++this.sliderPosition);
         }
 
         const isAtTop = nextTop < 0;
         const isAtBottom = nextTop >= this.totalContentHeight;
         const isAtBounds = isAtTop || isAtBottom;
-
-        // if (!isAtBounds) {
-        //   this.onScroll(direction);
-        // }
 
         nextTop = isAtBounds ? lastTop : nextTop;
         lastTop = nextTop;
@@ -138,11 +139,26 @@ export class HomeComponent implements OnInit {
   }
 
   public moveSlider(nextPosition: number, cb?: any): void {
+    this.pageScrollerService.viewScrolledEvent.next(this.sliderPosition);
     this.homeSlider.style.transition = '1000ms ease';
     this.homeSlider.style.transform = `translateY(-${nextPosition}px)`;
 
     if (cb) {
       cb();
     }
+  }
+
+  private setSliderPostion(newPosition: number): void {
+    if (newPosition > this.maxSliderPosition) {
+      this.sliderPosition = this.maxSliderPosition;
+    } else if (newPosition < this.minSliderPosition) {
+      this.sliderPosition = this.minSliderPosition;
+    } else {
+      this.sliderPosition = newPosition;
+    }
+  }
+
+  private isMoveThresholdMet(delta: number): boolean {
+    return Math.abs(delta) > 60;
   }
 }

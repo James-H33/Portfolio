@@ -18,9 +18,14 @@ export class TextSliderComponent implements OnInit {
 
   public currentIndex = 0;
 
+  public get singleElementHeight(): number {
+    const paddingSize = 40;
+    return this.textSize + (this.textSize * .20) + paddingSize;
+  }
+
   public ngOnInit(): void {
     setTimeout(() => {
-      const height = this.textSize + (this.textSize * .20);
+      const height = this.singleElementHeight;
       this.slider.nativeElement.style.height = `${height}px`;
       this.sliderTextWrapper.nativeElement.style.top = 0;
       this.sliderTextWrapper.nativeElement.style.height = `${height * this.values.length}px`;
@@ -37,7 +42,7 @@ export class TextSliderComponent implements OnInit {
   }
 
   public slide(dir: ScrollDirection): void {
-    if (ScrollDirection.Down) {
+    if (ScrollDirection.Down === dir) {
       this.slideDown();
     } else {
       this.slideUp();
@@ -45,21 +50,19 @@ export class TextSliderComponent implements OnInit {
   }
 
   public slideUp(): void {
-    const heightOfOneSection = this.textSize + (this.textSize * .20);
-
     if (this.currentIndex - 1 === 0) {
+      --this.currentIndex;
       this.sliderTextWrapper.nativeElement.style.top = '0px';
     } else {
       --this.currentIndex;
-      this.sliderTextWrapper.nativeElement.style.top = `-${(heightOfOneSection * this.currentIndex)}px`;
+      this.sliderTextWrapper.nativeElement.style.top = `-${(this.singleElementHeight * this.currentIndex)}px`;
     }
   }
 
   public slideDown(): void {
-    const heightOfOneSection = this.textSize + (this.textSize * .20);
     if (this.currentIndex + 1 <= (this.values.length  - 1)) {
       ++this.currentIndex;
-      this.sliderTextWrapper.nativeElement.style.top = `-${(heightOfOneSection * this.currentIndex)}px`;
+      this.sliderTextWrapper.nativeElement.style.top = `-${(this.singleElementHeight * this.currentIndex)}px`;
     }
   }
 }
