@@ -46,53 +46,15 @@ export class PageScrollerService {
     //     this.windowRef.addEventListener('wheel', this.scrollCallback);
     //   });
 
-    // this.windowRef.addEventListener('wheel', this.scrollCallback);
-    this.windowRef.addEventListener('scroll', this.touchMoveCallback);
-  }
-
-  public touchMoveCallback: any = (event: any) => {
-    // const direction = event.wheelDelta;
-    // console.log(event);
-    const top = this.windowRef.scrollY;
-    console.log(top);
-
-    const direction = top > this.destination ? -1 : 1;
-    console.log(direction);
-
-
-    // console.log(direction);
-
-    this.documentRef.body.style.overflow = 'hidden';
-
-    if (this.isScrolling) {
-      return;
-    }
-
-    // if (Math.abs(direction) < 80) {
-    //   return;
-    // }
-
-    if (direction < 0 && this.totalDocumentHeight !== (this.destination + this.windowHeight)) {
-      this.isScrolling = true;
-      return this.scrollDown();
-    }
-
-    // if (direction > 0 && this.destination !== 0) {
-    //   this.isScrolling = true;
-    //   return this.scrollUp();
-    // }
+    this.windowRef.addEventListener('wheel', this.wheelCallback);
   }
 
   public wheelCallback: any = (event: any) => {
     const direction = event.wheelDelta;
 
-    console.log(direction);
-
     this.documentRef.body.style.overflow = 'hidden';
 
     if (this.isScrolling) {
-      // event.preventDefault();
-      // event.stopPropagation();
       return;
     }
 
@@ -102,13 +64,11 @@ export class PageScrollerService {
 
     if (direction < 0 && this.totalDocumentHeight !== (this.destination + this.windowHeight)) {
       this.isScrolling = true;
-      // this.windowRef.removeEventListener('wheel', this.scrollCallback, true);
       return this.scrollDown();
     }
 
     if (direction > 0 && this.destination !== 0) {
       this.isScrolling = true;
-      // this.windowRef.removeEventListener('wheel', this.scrollCallback, true);
       return this.scrollUp();
     }
   }
@@ -133,14 +93,9 @@ export class PageScrollerService {
 
   public scrollTo(destination: number, type: ScrollDirection): void {
     this.windowRef.scrollTo({ top: destination, behavior: 'smooth' });
-    // this.windowScollEvent.next(type);
-    // console.log('Scrolling to Position');
 
     setTimeout(() => {
       if (destination === this.windowRef.pageYOffset) {
-        // clearInterval(this.scrollInterval);
-        // console.log('Interval');
-
         this.isScrolling = false;
       }
     }, 1000);

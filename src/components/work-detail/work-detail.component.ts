@@ -29,6 +29,10 @@ export class WorkDetailComponent implements OnInit {
     'Javascript - Node - Express'
   ];
 
+  public get isMobile(): boolean {
+    return this.windowRef.innerWidth < 800;
+  }
+
   public get slider(): HTMLElement {
     return this.elRef.nativeElement.querySelector('.work-item-slider');
   }
@@ -42,14 +46,67 @@ export class WorkDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isMobile) {
+      this.initializeMobileScrolling();
+    } else {
+      this.initializeDesktopScrolling();
+    }
+  }
+
+  public initializeDesktopScrolling(): void {
+    let lastTop = 0;
+    let isScrolling = false;
+
+    this.windowRef.addEventListener('wheel', (event: any) => {
+      console.log('Wheel Event!');
+      const delta = event.wheelDelta;
+      let direction: any;
+      let nextTop = 0;
+
+      if (isScrolling) {
+        return;
+      }
+
+      if (Math.abs(delta) < 80) {
+        return;
+      }
+
+      if (delta < 0 && this.totalContentHeight !== (lastTop + this.windowHeight)) {
+        isScrolling = true;
+        nextTop = lastTop + this.windowHeight;
+        lastTop = nextTop;
+        direction = ScrollDirection.Down;
+
+        return this.moveSlider(nextTop, () => {
+          setTimeout(() => {
+            isScrolling = false;
+          }, 1000);
+        });
+      }
+
+
+      if (delta > 0 && (lastTop - this.windowHeight >= 0)) {
+        isScrolling = true;
+        nextTop = lastTop - this.windowHeight;
+        lastTop = nextTop;
+        direction = ScrollDirection.Up;
+
+        return this.moveSlider(nextTop, () => {
+          setTimeout(() => {
+            isScrolling = false;
+          }, 1000);
+        });
+      }
+    });
+  }
+
+  public initializeMobileScrolling(): void {
     let touchStartPosition = 0;
     let touchMovePosition = 0;
     let lastTop = 0;
     let distanceMoved = 0;
 
     this.windowRef.addEventListener('touchstart', (event) => {
-      console.log('TouchStart');
-      this.slider.style.transition = 'unset';
       touchStartPosition = event.changedTouches[0].pageY;
     });
 
@@ -60,7 +117,6 @@ export class WorkDetailComponent implements OnInit {
     });
 
     this.windowRef.addEventListener('touchend', () => {
-      console.log('touchend');
       let nextTop = 0;
       let direction;
 
@@ -87,9 +143,17 @@ export class WorkDetailComponent implements OnInit {
         nextTop = lastTop;
       }
 
-      this.slider.style.transition = '1000ms ease';
-      this.slider.style.transform = `translateY(-${nextTop}px)`;
+      this.moveSlider(nextTop);
     });
+  }
+
+  public moveSlider(nextPosition: number, cb?: any): void {
+    this.slider.style.transition = '1000ms ease';
+    this.slider.style.transform = `translateY(-${nextPosition}px)`;
+
+    if (cb) {
+      cb();
+    }
   }
 
   public onScroll(direction: ScrollDirection): void {
