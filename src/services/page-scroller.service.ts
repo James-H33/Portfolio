@@ -35,17 +35,6 @@ export class PageScrollerService {
 
   public init(): void {
     console.log('[Init Called]');
-
-    // fromEvent(this.windowRef, 'wheel')
-    //   .pipe(
-    //     tap(() => console.log('[wheel]')),
-    //     debounceTime(10),
-    //     first(),
-    //   ).subscribe(() => {
-    //     this.documentRef.body.style.overflow = 'unset';
-    //     this.windowRef.addEventListener('wheel', this.scrollCallback);
-    //   });
-
     this.windowRef.addEventListener('wheel', this.wheelCallback);
   }
 

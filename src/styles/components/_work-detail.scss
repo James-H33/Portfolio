@@ -1,18 +1,9 @@
-@mixin MobileStyles {
-  height: 100%;
-  min-height: -webkit-fill-available;
-}
-
 .work {
   background-color: #000;
-  height: 100vh;
-  overflow-y: hidden;
 
   .work-item-slider {
     display: grid;
     height: 100%;
-    transition: 1000ms ease;
-    transform: translateY(0);
 
     .work-item-slide-wrapper {
       height: 100vh;
@@ -44,6 +35,11 @@
     width: 300px;
     top: calc(50% - 50px);
     left: 14%;
+    visibility: hidden;
+
+    &.active {
+      visibility: visible;
+    }
 
     .work-item-title {
       height: 82px;

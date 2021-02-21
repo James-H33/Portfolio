@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.resetScrollPositionHistory();
+
     this.doc.addEventListener('DOMContentLoaded', () => {
       const isMobileBreakPoint = this.windowRef.innerWidth < 720;
       const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
@@ -25,12 +27,13 @@ export class AppComponent implements OnInit {
         this.doc.body.classList.add('is-mobile-browser');
       }
     });
+  }
 
-    // this.windowRef.addEventListener('resize', (event: Event) => {
-    //   console.log(event);
+  public resetScrollPositionHistory(): void {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
 
-      // this.doc.body.classList.add('is-mobile-browser');
-    // });
-    // this.pageScrollerService.init();
+    this.windowRef.scrollTo({ top: 0 });
   }
 }

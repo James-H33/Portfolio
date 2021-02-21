@@ -2,8 +2,7 @@
 
   .home-intro {
     height: 100vh;
-    // display: grid;
-    display: none;
+    display: grid;
     grid-template-areas: 'HomeContent';
     grid-template-columns: 1fr;
     position: relative;
@@ -74,5 +73,17 @@
 
   .home-work {
     // height: 100vh;
+  }
+}
+
+body {
+  &.is-mobile-browser {
+    .home-intro {
+      @include MobileStyles();
+
+      .home-picture {
+        @include MobileStyles();
+      }
+    }
   }
 }
