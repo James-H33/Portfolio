@@ -3,6 +3,11 @@
   margin: 0;
 }
 
+html,
+body {
+  overflow: hidden;
+}
+
 body {
   font-family: 'Roboto';
 }
@@ -13,6 +18,43 @@ body {
 @import './pages';
 
 main {
-  // max-width: 1400px;
-  // margin: 0 auto;
+  position: relative;
+
+  .info-slider-wrapper {
+    position: absolute;
+    display: block;
+    top: 10%;
+    left: 10%;
+    z-index: 1;
+    height: 100px;
+    width: 300px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 200ms ease;
+
+    &.active {
+      transition: 750ms ease 250ms;
+      visibility: visible;
+      opacity: 1;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    p {
+      color: #B8B8B8;
+    }
+  }
+
+  .info-slider-title {
+    height: 82px;
+    overflow-y: hidden;
+    position: relative;
+  }
+
+  .info-slider-description {
+    height: 20px;
+    overflow-y: hidden;
+  }
 }

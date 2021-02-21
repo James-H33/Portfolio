@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ScrollDirection } from 'src/models';
 
 @Component({
   selector: 'app-text-slider',
@@ -17,11 +18,14 @@ export class TextSliderComponent implements OnInit {
 
   public currentIndex = 0;
 
+  public get singleElementHeight(): number {
+    const paddingSize = 40;
+    return this.textSize + (this.textSize * .20) + paddingSize;
+  }
+
   public ngOnInit(): void {
     setTimeout(() => {
-      console.log(this.sliderText);
-
-      const height = this.textSize + (this.textSize * .20);
+      const height = this.singleElementHeight;
       this.slider.nativeElement.style.height = `${height}px`;
       this.sliderTextWrapper.nativeElement.style.top = 0;
       this.sliderTextWrapper.nativeElement.style.height = `${height * this.values.length}px`;
@@ -30,35 +34,35 @@ export class TextSliderComponent implements OnInit {
         el.nativeElement.style.fontSize = `${this.textSize}px`;
         el.nativeElement.style.color = `${this.color}`;
       });
-    }, 1000);
+    }, 750);
 
     if (this.direction) {
-      this.direction.subscribe((dir: any) => {
-        this.slide();
-      });
+      this.direction.subscribe((dir: any) => this.slide(dir));
     }
   }
 
-  public slide() {
-    this.slideDown();
+  public slide(dir: ScrollDirection): void {
+    if (ScrollDirection.Down === dir) {
+      this.slideDown();
+    } else {
+      this.slideUp();
+    }
   }
 
-  public slideUp() {
-    const heightOfOneSection = this.textSize + (this.textSize * .20);
-
+  public slideUp(): void {
     if (this.currentIndex - 1 === 0) {
+      --this.currentIndex;
       this.sliderTextWrapper.nativeElement.style.top = '0px';
     } else {
       --this.currentIndex;
-      this.sliderTextWrapper.nativeElement.style.top = `-${(heightOfOneSection * this.currentIndex)}px`;
+      this.sliderTextWrapper.nativeElement.style.top = `-${(this.singleElementHeight * this.currentIndex)}px`;
     }
   }
 
-  public slideDown() {
-    const heightOfOneSection = this.textSize + (this.textSize * .20);
+  public slideDown(): void {
     if (this.currentIndex + 1 <= (this.values.length  - 1)) {
       ++this.currentIndex;
-      this.sliderTextWrapper.nativeElement.style.top = `-${(heightOfOneSection * this.currentIndex)}px`;
+      this.sliderTextWrapper.nativeElement.style.top = `-${(this.singleElementHeight * this.currentIndex)}px`;
     }
   }
 }

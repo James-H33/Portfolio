@@ -4,6 +4,10 @@
 
   .text-slider-wrapper {
     position: absolute;
-    transition: 500ms ease;
+    transition: 750ms ease;
+
+    div {
+      padding-bottom: 40px;
+    }
   }
 }

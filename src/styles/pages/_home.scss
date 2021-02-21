@@ -1,4 +1,5 @@
 .home {
+  background: black;
 
   .home-intro {
     height: 100vh;
@@ -73,5 +74,17 @@
 
   .home-work {
     // height: 100vh;
+  }
+}
+
+body {
+  &.is-mobile-browser {
+    .home-intro {
+      @include MobileStyles();
+
+      .home-picture {
+        @include MobileStyles();
+      }
+    }
   }
 }

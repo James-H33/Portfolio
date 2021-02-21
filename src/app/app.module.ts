@@ -8,6 +8,7 @@ import { HomeComponent } from 'src/pages/home/home.component';
 import { NavLinkComponent } from '../components/nav-link/nav-link.component';
 import { WorkDetailComponent } from '../components/work-detail/work-detail.component';
 import { TextSliderComponent } from '../components/text-slider/text-slider.component';
+import { PageScrollerService } from 'src/services/page-scroller.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,10 @@ import { TextSliderComponent } from '../components/text-slider/text-slider.compo
     AppRoutingModule
   ],
   providers: [
+    PageScrollerService,
     { provide: 'Document', useValue: document },
     { provide: 'Window', useValue: window }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
