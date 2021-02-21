@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
         return this.moveSlider(nextTop, () => {
           setTimeout(() => {
             isScrolling = false;
-          }, 1000);
+          }, 750);
         });
       }
 
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
         return this.moveSlider(nextTop, () => {
           setTimeout(() => {
             isScrolling = false;
-          }, 1000);
+          }, 750);
         });
       }
     });
@@ -140,7 +140,7 @@ export class HomeComponent implements OnInit {
 
   public moveSlider(nextPosition: number, cb?: any): void {
     this.pageScrollerService.viewScrolledEvent.next(this.sliderPosition);
-    this.homeSlider.style.transition = '1000ms ease';
+    this.homeSlider.style.transition = '750ms ease';
     this.homeSlider.style.transform = `translateY(-${nextPosition}px)`;
 
     if (cb) {

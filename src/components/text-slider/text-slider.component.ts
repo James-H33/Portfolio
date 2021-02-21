@@ -34,7 +34,7 @@ export class TextSliderComponent implements OnInit {
         el.nativeElement.style.fontSize = `${this.textSize}px`;
         el.nativeElement.style.color = `${this.color}`;
       });
-    }, 1000);
+    }, 750);
 
     if (this.direction) {
       this.direction.subscribe((dir: any) => this.slide(dir));

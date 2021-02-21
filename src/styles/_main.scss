@@ -33,7 +33,7 @@ main {
     transition: 200ms ease;
 
     &.active {
-      transition: 1000ms ease 350ms;
+      transition: 750ms ease 250ms;
       visibility: visible;
       opacity: 1;
     }
