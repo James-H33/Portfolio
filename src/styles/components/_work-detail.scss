@@ -20,6 +20,14 @@
       background-size: cover;
       background-position: center;
 
+      .ncrs {
+        background-image: url('../../assets/images/ncrs.png');
+      }
+
+      .camping {
+        background-image: url('../../assets/images/camping-1.png');
+      }
+
       @media screen and (min-width: $mobile) {
         width: 80vw;
         height: 80vh;
