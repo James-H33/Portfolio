@@ -20,11 +20,11 @@
       background-size: cover;
       background-position: center;
 
-      .ncrs {
+      &.ncrs {
         background-image: url('../../assets/images/ncrs.png');
       }
 
-      .camping {
+      &.camping {
         background-image: url('../../assets/images/camping-1.png');
       }
 
