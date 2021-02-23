@@ -10,13 +10,10 @@
     background-color: black;
 
     @media screen and (min-width: $mobile) {
-      grid-template-areas: 'HomeInfo HomePicture';
-      grid-template-columns: 1fr 1fr;
-      background: url('../../assets/images/waves.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position-y: bottom;
-      background-color: #fdfdfd;
+      background-color: black;
     }
 
     .home-info {
@@ -25,21 +22,24 @@
       align-content: end;
       padding: 40px;
       z-index: 1;
-      margin-bottom: 5em;
+      margin-bottom: 3em;
 
       @media screen and (min-width: $mobile) {
-        grid-area: HomeInfo;
         align-content: center;
         margin-bottom: 0;
       }
 
       h1 {
-        color: white;
+        color: #f5f5f5;
         font-size: 48px;
         line-height: 40px;
 
+        @media screen and (min-width: $mobile - 200) {
+          font-size: 65px;
+          line-height: 58px;
+        }
+
         @media screen and (min-width: $mobile) {
-          color: $primary-text-color;
           font-size: 89px;
           line-height: 80px;
         }
@@ -47,8 +47,9 @@
 
       .home-hello {
         font-size: 20px;
-        color: #B54F4F;
-        margin-bottom: 10px;
+        // color: #B54F4F;
+        color: #ffd257;
+        margin-bottom: 5px;
         margin-left: 5px;
       }
     }
@@ -56,15 +57,13 @@
     .home-picture {
       grid-area: HomeContent;
       height: 100vh;
-      background: url('../../assets/images/profile-dark.png');
-      background-size: auto;
+      background: url('../../assets/images/profile-photo-v2.png');
+      background-size: 80vh;
       background-repeat: no-repeat;
       background-position-y: bottom;
-      background-position-x: right;
+      background-position-x: center;
 
-      @media screen and (min-width: $mobile) {
-        grid-area: HomePicture;
-        background: url('../../assets/images/profile.png');
+      @media screen and (min-width: $mobile - 50) {
         background-repeat: no-repeat;
         background-position-y: bottom;
         background-position-x: right;
