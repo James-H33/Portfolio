@@ -20,6 +20,10 @@
       background-size: cover;
       background-position: center;
 
+      &.flight {
+        background-image: url('../../assets/images/flight-image.png');
+      }
+
       &.ncrs {
         background-image: url('../../assets/images/ncrs.png');
       }
