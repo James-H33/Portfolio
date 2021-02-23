@@ -21,15 +21,15 @@
       background-position: center;
 
       &.flight {
-        background-image: url('../../assets/images/flight-image.png');
+        background-image: url('../../assets/images/flight-image-v1.jpg');
       }
 
       &.ncrs {
-        background-image: url('../../assets/images/ncrs.png');
+        background-image: url('../../assets/images/ncrs.jpg');
       }
 
       &.camping {
-        background-image: url('../../assets/images/camping-1.png');
+        background-image: url('../../assets/images/camping.jpg');
       }
 
       @media screen and (min-width: $mobile) {
