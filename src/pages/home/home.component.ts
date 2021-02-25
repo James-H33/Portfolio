@@ -1,4 +1,5 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { BrowserService } from 'src/services/browser.service';
 import { PageScrollerService } from 'src/services/page-scroller.service';
 
 @Component({
@@ -16,11 +17,12 @@ export class HomeComponent implements OnInit {
     private elRef: ElementRef,
     @Inject('Document') private doc: Document,
     @Inject('Window') private windowRef: Window,
-    private pageScrollerService: PageScrollerService
+    private pageScrollerService: PageScrollerService,
+    private browserService: BrowserService
   ) { }
 
   public get isMobile(): boolean {
-    return this.windowRef.innerWidth < 800;
+    return this.windowRef.innerWidth < 769;
   }
 
   public get homeSlider(): HTMLElement {
@@ -32,11 +34,11 @@ export class HomeComponent implements OnInit {
   }
 
   public get windowHeight(): number {
-    return this.windowRef.innerHeight;
+    return this.browserService.getViewportHeight();
   }
 
   public get totalContentHeight(): number {
-    return 4 * this.windowRef.innerHeight;
+    return 4 * this.browserService.getViewportHeight();
   }
 
   public get homeIntro(): HTMLElement {
@@ -49,6 +51,10 @@ export class HomeComponent implements OnInit {
     } else {
       this.initializeDesktopScrolling();
     }
+
+    this.browserService.watchWindowSizeEvent().subscribe(() => {
+      this.moveSlider(this.windowHeight * this.sliderPosition);
+    });
   }
 
   public initializeDesktopScrolling(): void {
@@ -56,7 +62,7 @@ export class HomeComponent implements OnInit {
     let isScrolling = false;
 
     this.windowRef.addEventListener('wheel', (event: any) => {
-      const delta = event.wheelDelta;
+      const delta = this.extractDelta(event);
       let nextTop = 0;
 
       if (isScrolling) {
@@ -117,11 +123,13 @@ export class HomeComponent implements OnInit {
 
       if (distanceMoved !== 0 && this.isMoveThresholdMet(distanceMoved - lastTop)) {
         if (distanceMoved < lastTop) {
-          nextTop = lastTop - this.windowHeight;
-          this.setSliderPostion(--this.sliderPosition);
+          --this.sliderPosition;
+          nextTop = this.windowHeight * this.sliderPosition;
+          this.setSliderPostion(this.sliderPosition);
         } else {
-          nextTop = lastTop + this.windowHeight;
-          this.setSliderPostion(++this.sliderPosition);
+          ++this.sliderPosition;
+          nextTop = this.windowHeight * this.sliderPosition;
+          this.setSliderPostion(this.sliderPosition);
         }
 
         const isAtTop = nextTop < 0;
@@ -160,5 +168,21 @@ export class HomeComponent implements OnInit {
 
   private isMoveThresholdMet(delta: number): boolean {
     return Math.abs(delta) > 60;
+  }
+
+  private extractDelta(e: any): number {
+    if ('wheelDelta' in e) {
+      return e.wheelDelta;
+    }
+
+    if ('deltaY' in e) {
+      return e.deltaY * -3;
+    }
+
+    if ('detail' in e) {
+      return e.detail * -40;
+    }
+
+    return 0;
   }
 }

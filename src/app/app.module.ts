@@ -9,6 +9,7 @@ import { NavLinkComponent } from '../components/nav-link/nav-link.component';
 import { WorkDetailComponent } from '../components/work-detail/work-detail.component';
 import { TextSliderComponent } from '../components/text-slider/text-slider.component';
 import { PageScrollerService } from 'src/services/page-scroller.service';
+import { BrowserService } from 'src/services/browser.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PageScrollerService } from 'src/services/page-scroller.service';
   ],
   providers: [
     PageScrollerService,
+    BrowserService,
     { provide: 'Document', useValue: document },
     { provide: 'Window', useValue: window }
   ],

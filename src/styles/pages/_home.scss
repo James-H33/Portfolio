@@ -2,7 +2,7 @@
   background: black;
 
   .home-intro {
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: grid;
     grid-template-areas: 'HomeContent';
     grid-template-columns: 1fr;
@@ -56,7 +56,6 @@
 
     .home-picture {
       grid-area: HomeContent;
-      height: 100vh;
       background: url('../../assets/images/profile-photo-v2.png');
       background-size: 80vh;
       background-repeat: no-repeat;
@@ -72,7 +71,6 @@
   }
 
   .home-work {
-    // height: 100vh;
   }
 }
 
