@@ -23,7 +23,7 @@ main {
   .info-slider-wrapper {
     position: absolute;
     display: block;
-    top: 10%;
+    top: 11%;
     left: 10%;
     z-index: 1;
     height: 100px;
@@ -56,5 +56,11 @@ main {
   .info-slider-description {
     height: 20px;
     overflow-y: hidden;
+  }
+
+  @media screen and (min-width: $mobile) {
+    .info-slider-wrapper {
+      left: 14%;
+    }
   }
 }

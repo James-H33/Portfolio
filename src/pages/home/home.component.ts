@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   public get isMobile(): boolean {
-    return this.windowRef.innerWidth < 800;
+    return this.windowRef.innerWidth < 769;
   }
 
   public get homeSlider(): HTMLElement {
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
     let isScrolling = false;
 
     this.windowRef.addEventListener('wheel', (event: any) => {
-      const delta = event.wheelDelta;
+      const delta = this.extractDelta(event);
       let nextTop = 0;
 
       if (isScrolling) {
@@ -168,5 +168,21 @@ export class HomeComponent implements OnInit {
 
   private isMoveThresholdMet(delta: number): boolean {
     return Math.abs(delta) > 60;
+  }
+
+  private extractDelta(e: any): number {
+    if ('wheelDelta' in e) {
+      return e.wheelDelta;
+    }
+
+    if ('deltaY' in e) {
+      return e.deltaY * -3;
+    }
+
+    if ('detail' in e) {
+      return e.detail * -40;
+    }
+
+    return 0;
   }
 }
