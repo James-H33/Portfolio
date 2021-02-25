@@ -2,6 +2,7 @@ import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ScrollDirection } from 'src/models';
+import { BrowserService } from 'src/services/browser.service';
 import { PageScrollerService } from 'src/services/page-scroller.service';
 
 @Component({
@@ -34,10 +35,16 @@ export class AppComponent implements OnInit {
     @Inject('Document') public doc: Document,
     @Inject('Window') public windowRef: Window,
     private pageScrollerService: PageScrollerService,
+    private browserService: BrowserService
   ) { }
 
   public ngOnInit(): void {
     this.resetScrollPositionHistory();
+    this.watchScrollEvents();
+    this.browserService.init();
+  }
+
+  private watchScrollEvents(): void {
     this.pageScrollerService.viewScrolledEvent.subscribe(position => {
       if (this.sliderPosition === position) {
         return;
@@ -52,15 +59,6 @@ export class AppComponent implements OnInit {
         } else {
           this.slideDirection.next(ScrollDirection.Up);
         }
-      }
-    });
-
-    this.doc.addEventListener('DOMContentLoaded', () => {
-      const isMobileBreakPoint = this.windowRef.innerWidth < 720;
-      const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
-
-      if (isMobileBreakPoint && isMobileDevice) {
-        this.doc.body.classList.add('is-mobile-browser');
       }
     });
   }
