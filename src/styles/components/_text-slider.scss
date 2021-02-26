@@ -6,6 +6,14 @@
     position: absolute;
     transition: 750ms ease;
 
+    .text-slider-text {
+      a {
+        color: white;
+        font-size: inherit;
+        position: relative;
+      }
+    }
+
     div {
       padding-bottom: 40px;
     }

@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 export class NavLinkComponent {
   @Input() public text = '';
   @Input() public link = '';
+  @Input() public openInNewTab = false;
 }

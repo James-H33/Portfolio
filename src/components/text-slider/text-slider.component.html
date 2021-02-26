@@ -1,7 +1,15 @@
 <div #Slider class="text-slider">
   <div #SliderTextWrapper class="text-slider-wrapper">
-    <div #SliderText *ngFor="let value of values">
-      {{value}}
+    <div #SliderText *ngFor="let value of values" class="text-slider-text">
+      <ng-container *ngIf="value.url">
+        <a [href]="value.url" target="_blank">
+          {{value.title}}
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="!value.url">
+        {{value}}
+      </ng-container>
     </div>
   </div>
 </div>

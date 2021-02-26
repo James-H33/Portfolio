@@ -1,1 +1,7 @@
-<a [href]="link"><ng-content></ng-content></a>
+<ng-container *ngIf="openInNewTab">
+  <a [href]="link" target="_blank"><ng-content></ng-content></a>
+</ng-container>
+
+<ng-container *ngIf="!openInNewTab">
+  <a [href]="link"><ng-content></ng-content></a>
+</ng-container>
