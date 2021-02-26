@@ -16,9 +16,18 @@ export class AppComponent implements OnInit {
   public slideDirection = new Subject<any>();
 
   public titles = [
-    'Flights',
-    'Camping',
-    'NCRS'
+    {
+      title: 'Flights',
+      url: 'https://ncrs-florida.herokuapp.com'
+    },
+    {
+      title: 'Camping',
+      url: 'https://ncrs-florida.herokuapp.com'
+    },
+    {
+      title: 'NCRS',
+      url: 'https://ncrs-florida.herokuapp.com'
+    }
   ];
 
   public descriptions = [

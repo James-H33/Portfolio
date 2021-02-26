@@ -9,7 +9,7 @@ import { ScrollDirection } from 'src/models';
 export class TextSliderComponent implements OnInit {
   @Input() public color = '#fff';
   @Input() public textSize = 16;
-  @Input() public values: string[] = [];
+  @Input() public values: any[] = [];
   @Input() public direction?: Subject<string>;
 
   @ViewChild('Slider') public slider!: ElementRef;
@@ -31,8 +31,10 @@ export class TextSliderComponent implements OnInit {
       this.sliderTextWrapper.nativeElement.style.height = `${height * this.values.length}px`;
 
       this.sliderText?.forEach(el => {
-        el.nativeElement.style.fontSize = `${this.textSize}px`;
-        el.nativeElement.style.color = `${this.color}`;
+        const fontSize = `${this.textSize}px`;
+        const fontColor = this.color;
+        el.nativeElement.style.fontSize = fontSize;
+        el.nativeElement.style.color = fontColor;
       });
     }, 750);
 
