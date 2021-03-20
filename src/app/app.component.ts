@@ -17,23 +17,23 @@ export class AppComponent implements OnInit {
 
   public titles = [
     {
-      title: 'Flights',
-      url: 'https://ncrs-florida.herokuapp.com'
-    },
-    {
       title: 'Camping',
-      url: 'https://ncrs-florida.herokuapp.com'
+      url: 'https://james-h33.github.io/Campers'
     },
     {
       title: 'NCRS',
       url: 'https://ncrs-florida.herokuapp.com'
+    },
+    {
+      title: 'It Works!',
+      url: 'https://itworks.com'
     }
   ];
 
   public descriptions = [
-    'C# - Blazor Framework',
-    'C# - Blazor Framework',
-    'Javascript - Node - Express'
+    'C# - Blazor Framework - SQL',
+    'Javascript - Node - Express',
+    'Javascript - Angular - Docker'
   ];
 
   public get isTextSliderActive(): boolean {
