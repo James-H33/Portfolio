@@ -22,7 +22,8 @@
 
       &.itworks {
         background-position: right;
-        background-image: url('../../assets/images/itworks-logo-lg.png');
+        // background-image: url('../../assets/images/itworks-logo-lg.png');
+        background-image: url('../../assets/images/itworks-logo.svg');
 
         @media screen and (min-width: $mobile) {
 
