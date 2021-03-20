@@ -20,8 +20,13 @@
       background-size: cover;
       background-position: center;
 
-      &.flight {
-        background-image: url('../../assets/images/flight-image-v1.jpg');
+      &.itworks {
+        background-position: right;
+        background-image: url('../../assets/images/itworks-logo-lg.png');
+
+        @media screen and (min-width: $mobile) {
+
+        }
       }
 
       &.ncrs {
