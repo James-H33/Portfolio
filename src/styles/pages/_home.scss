@@ -47,8 +47,7 @@
 
       .home-hello {
         font-size: 20px;
-        // color: #B54F4F;
-        color: #ffd257;
+        color: $accent-text-color;
         margin-bottom: 5px;
         margin-left: 5px;
       }
@@ -71,6 +70,10 @@
   }
 
   .home-work {
+  }
+
+  .home-info {
+
   }
 }
 

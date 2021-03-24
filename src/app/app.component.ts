@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ScrollDirection } from 'src/models';
 import { BrowserService } from 'src/services/browser.service';
+import { CursorService } from 'src/services/cursor.service';
 import { PageScrollerService } from 'src/services/page-scroller.service';
 
 @Component({
@@ -37,20 +38,22 @@ export class AppComponent implements OnInit {
   ];
 
   public get isTextSliderActive(): boolean {
-    return this.sliderPosition > 0;
+    return this.sliderPosition > 0 && this.sliderPosition < 4;
   }
 
   constructor(
     @Inject('Document') public doc: Document,
     @Inject('Window') public windowRef: Window,
     private pageScrollerService: PageScrollerService,
-    private browserService: BrowserService
+    private browserService: BrowserService,
+    private cursorService: CursorService
   ) { }
 
   public ngOnInit(): void {
     this.resetScrollPositionHistory();
     this.watchScrollEvents();
     this.browserService.init();
+    this.cursorService.init();
   }
 
   private watchScrollEvents(): void {

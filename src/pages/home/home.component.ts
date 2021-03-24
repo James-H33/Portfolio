@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   public isScrolling = false;
   public sliderPosition = 0;
   public minSliderPosition = 0;
-  public maxSliderPosition = 3;
+  public maxSliderPosition = 4;
 
   constructor(
     private elRef: ElementRef,
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   }
 
   public get totalContentHeight(): number {
-    return 4 * this.browserService.getViewportHeight();
+    return (this.maxSliderPosition + 1) * this.browserService.getViewportHeight();
   }
 
   public get homeIntro(): HTMLElement {
