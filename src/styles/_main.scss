@@ -6,6 +6,7 @@
 html,
 body {
   overflow: hidden;
+  cursor: none;
 }
 
 body {
@@ -23,7 +24,7 @@ main {
   .info-slider-wrapper {
     position: absolute;
     display: block;
-    top: 11%;
+    top: 9%;
     left: 10%;
     z-index: 1;
     height: 100px;
@@ -61,6 +62,24 @@ main {
   @media screen and (min-width: $mobile) {
     .info-slider-wrapper {
       left: 14%;
+    }
+  }
+
+  .cursor {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: $accent-text-color;
+    z-index: 10;
+    transform: translateX(0);
+    clip-path: polygon(0 30%, 49% 100%, 100% 66%);
+    transition: translate 250ms linear, height 250ms linear, width 250ms linear, clip-path 250ms linear;
+
+    &.hovered {
+      width: 35px;
+      height: 35px;
+      transform: translateX(-5px);
     }
   }
 }

@@ -10,15 +10,23 @@ import { WorkDetailComponent } from '../components/work-detail/work-detail.compo
 import { TextSliderComponent } from '../components/text-slider/text-slider.component';
 import { PageScrollerService } from 'src/services/page-scroller.service';
 import { BrowserService } from 'src/services/browser.service';
+import { InfoComponent } from 'src/components/info/info.component';
+import { CursorService } from 'src/services/cursor.service';
+import { CursorDirective } from 'src/directives/cursor-hover.directive';
 
 @NgModule({
   declarations: [
+    // Components
     AppComponent,
+    InfoComponent,
     HeaderComponent,
     HomeComponent,
     NavLinkComponent,
     WorkDetailComponent,
-    TextSliderComponent
+    TextSliderComponent,
+
+    // Directives
+    CursorDirective
   ],
   imports: [
     BrowserModule,
@@ -27,6 +35,7 @@ import { BrowserService } from 'src/services/browser.service';
   providers: [
     PageScrollerService,
     BrowserService,
+    CursorService,
     { provide: 'Document', useValue: document },
     { provide: 'Window', useValue: window }
   ],

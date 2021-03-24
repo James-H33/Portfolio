@@ -1,0 +1,72 @@
+.info {
+  height: calc(100vh - 100px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 100px;
+  padding-top: 100px;
+  position: relative;
+
+  h2 {
+    color: white;
+    font-size: 50px;
+    margin-bottom: 60px;
+  }
+
+  .about {
+    height: 100vh;
+    padding: 80px;
+    color: white;
+
+    p {
+      font-size: 21px;
+      font-weight: bold;
+      line-height: 50px;
+    }
+  }
+
+  .contact {
+    height: 100vh;
+    padding: 80px;
+    color: white;
+
+    .contact-element {
+      display: grid;
+      margin-bottom: 56px;
+
+      &--label {
+        color: $accent-text-color;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      &--info {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-column-gap: 10px;
+        border-radius: 4px;
+        background: #161616;
+        padding: 22px;
+      }
+
+      &--text {
+        color: #d8d8d8;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        letter-spacing: 0.5px;
+      }
+
+      &--copy {
+        justify-self: end;
+        height: 22px;
+        width: 18px;
+        background-image: url('../../assets/images/copy-icon.png');
+        background-repeat: no-repeat;
+      }
+    }
+  }
+
+  .contact--background {
+
+  }
+}
