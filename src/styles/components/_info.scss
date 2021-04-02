@@ -1,33 +1,58 @@
 .info {
-  height: calc(100vh - 100px);
+  height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 100px;
+  grid-template-columns: 1fr;
   padding-top: 100px;
   position: relative;
+  background: black;
+
+  @media screen and (min-width: $mobile) {
+    height: calc(100vh - 100px);
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 100px;
+  }
 
   h2 {
     color: white;
     font-size: 50px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+
+    @media screen and (min-width: $mobile) {
+      margin-bottom: 60px;
+    }
   }
 
   .about {
-    height: 100vh;
-    padding: 80px;
+    height: calc((var(--vh, 1vh) * 100) - 100px);
+    padding: 40px;
     color: white;
 
+    @media screen and (min-width: $mobile) {
+      height: 100vh;
+      padding: 80px;
+    }
+
     p {
-      font-size: 21px;
+      font-size: 18px;
       font-weight: bold;
-      line-height: 50px;
+      line-height: 30px;
+
+      @media screen and (min-width: $mobile) {
+        font-size: 21px;
+        line-height: 50px;
+      }
     }
   }
 
   .contact {
-    height: 100vh;
-    padding: 80px;
+    height: calc((var(--vh, 1vh) * 100) - 100px);
+    padding: 40px;
     color: white;
+
+    @media screen and (min-width: $mobile) {
+      height: 100vh;
+      padding: 80px;
+    }
 
     .contact-element {
       display: grid;
@@ -45,7 +70,7 @@
         grid-column-gap: 10px;
         border-radius: 4px;
         background: #161616;
-        padding: 22px;
+        position: relative;
       }
 
       &--text {
@@ -54,14 +79,44 @@
         white-space: nowrap;
         overflow: hidden;
         letter-spacing: 0.5px;
+
+
+        input {
+          color: #d8d8d8;
+          font-size: 16px;
+          width: 100%;
+          padding: 22px;
+          background: #161616;
+          border: none;
+          outline: none;
+          cursor: none;
+
+          &:disabled {
+            color: #d8d8d8;
+            -webkit-text-fill-color: #d8d8d8;
+            opacity: 1
+          }
+        }
       }
 
       &--copy {
-        justify-self: end;
-        height: 22px;
-        width: 18px;
-        background-image: url('../../assets/images/copy-icon.png');
-        background-repeat: no-repeat;
+        position: absolute;
+        height: 62px;
+        width: 55px;
+        right: 0;
+        top: 0;
+        background: #161616;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        box-shadow: -1px 0px 9px 0px #141212;
+
+        .copy-button {
+          height: 22px;
+          width: 18px;
+          background-image: url('../../assets/images/copy-icon.png');
+          background-repeat: no-repeat;
+        }
       }
     }
   }

@@ -2,7 +2,7 @@
   <div #SliderTextWrapper class="text-slider-wrapper">
     <div #SliderText *ngFor="let value of values" class="text-slider-text">
       <ng-container *ngIf="value.url">
-        <a [href]="value.url" target="_blank">
+        <a [href]="value.url" target="_blank" appCursorHover>
           {{value.title}}
         </a>
       </ng-container>

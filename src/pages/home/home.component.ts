@@ -1,6 +1,7 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { BrowserService } from 'src/services/browser.service';
 import { PageScrollerService } from 'src/services/page-scroller.service';
+import { isMobile } from 'src/utils/util.functions';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,10 @@ export class HomeComponent implements OnInit {
   public isScrolling = false;
   public sliderPosition = 0;
   public minSliderPosition = 0;
-  public maxSliderPosition = 4;
+
+  public get maxSliderPosition(): number {
+    return this.isMobile ? 6 : 5;
+  }
 
   constructor(
     private elRef: ElementRef,
@@ -22,7 +26,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   public get isMobile(): boolean {
-    return this.windowRef.innerWidth < 769;
+    return isMobile();
   }
 
   public get homeSlider(): HTMLElement {
@@ -38,7 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   public get totalContentHeight(): number {
-    return (this.maxSliderPosition + 1) * this.browserService.getViewportHeight();
+    return this.maxSliderPosition * this.browserService.getViewportHeight();
   }
 
   public get homeIntro(): HTMLElement {
