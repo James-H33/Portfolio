@@ -1,0 +1,20 @@
+.app-toast {
+  min-width: 100px;
+  border-radius: 8px;
+  bottom: 0;
+  position: fixed;
+  z-index: 5;
+  left: 50%;
+  color: white;
+  padding: 15px;
+  background: #222;
+  transform: translateX(-50%) translateY(50px);
+  transition: ease-in-out 300ms;
+  visibility: hidden;
+  text-align: center;
+
+  &.open {
+    transform: translateX(-50%) translateY(-50px);
+    visibility: visible;
+  }
+}

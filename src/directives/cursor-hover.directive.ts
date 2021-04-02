@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 import { CursorService } from 'src/services/cursor.service';
+import { isMobile } from 'src/utils/util.functions';
 
 @Directive({
   selector: '[appCursorHover]'
@@ -11,10 +12,14 @@ export class CursorDirective {
   ) { }
 
   @HostListener('mouseenter') onMouseEnter(): void {
-    this.cursorService.updateHoverState();
+    if (!isMobile()) {
+      this.cursorService.updateHoverState();
+    }
   }
 
   @HostListener('mouseleave') onMouseLeave(): void {
-    this.cursorService.updateHoverState();
+    if (!isMobile()) {
+      this.cursorService.updateHoverState();
+    }
   }
 }

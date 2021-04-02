@@ -13,6 +13,9 @@ import { BrowserService } from 'src/services/browser.service';
 import { InfoComponent } from 'src/components/info/info.component';
 import { CursorService } from 'src/services/cursor.service';
 import { CursorDirective } from 'src/directives/cursor-hover.directive';
+import { CommonModule } from '@angular/common';
+import { ToastComponent } from 'src/components/toast/toast.component';
+import { ClipboardDirective } from 'src/directives/clip-board-copy.directive';
 
 @NgModule({
   declarations: [
@@ -24,12 +27,15 @@ import { CursorDirective } from 'src/directives/cursor-hover.directive';
     NavLinkComponent,
     WorkDetailComponent,
     TextSliderComponent,
+    ToastComponent,
 
     // Directives
-    CursorDirective
+    CursorDirective,
+    ClipboardDirective
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule
   ],
   providers: [

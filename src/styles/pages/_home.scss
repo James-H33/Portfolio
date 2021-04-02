@@ -1,5 +1,5 @@
 .home {
-  background: black;
+  background: $background-color;
 
   .home-intro {
     height: calc(var(--vh, 1vh) * 100);
@@ -7,13 +7,13 @@
     grid-template-areas: 'HomeContent';
     grid-template-columns: 1fr;
     position: relative;
-    background-color: black;
+    background-color: $background-color;
 
     @media screen and (min-width: $mobile) {
       background-size: contain;
       background-repeat: no-repeat;
       background-position-y: bottom;
-      background-color: black;
+      background-color: $background-color;
     }
 
     .home-info {
@@ -67,13 +67,6 @@
         background-position-x: right;
       }
     }
-  }
-
-  .home-work {
-  }
-
-  .home-info {
-
   }
 }
 
