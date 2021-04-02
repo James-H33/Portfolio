@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { isMobile } from 'src/utils/util.functions';
 
 @Injectable()
 export class CursorService {
@@ -11,6 +12,10 @@ export class CursorService {
   ) { }
 
   public init(): void {
+    if (isMobile()) {
+      return;
+    }
+
     this.cursorElement = this.doc.querySelector('.cursor') as HTMLElement;
 
     this.windowRef.addEventListener('mousemove', (event) => {

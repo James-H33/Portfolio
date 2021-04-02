@@ -24,7 +24,7 @@ main {
   .info-slider-wrapper {
     position: absolute;
     display: block;
-    top: 9%;
+    top: 7%;
     left: 10%;
     z-index: 1;
     height: 100px;
@@ -32,6 +32,10 @@ main {
     visibility: hidden;
     opacity: 0;
     transition: 200ms ease;
+
+    @media screen and (min-width: $mobile) {
+      top: 9%;
+    }
 
     &.active {
       transition: 750ms ease 250ms;
@@ -66,20 +70,22 @@ main {
   }
 
   .cursor {
+    display: none;
     position: absolute;
     content: '';
     width: 20px;
     height: 20px;
-    background: $accent-text-color;
+    background: white;
     z-index: 10;
-    transform: translateX(0);
+    transform: translate(0, 0);
     clip-path: polygon(0 30%, 49% 100%, 100% 66%);
-    transition: translate 250ms linear, height 250ms linear, width 250ms linear, clip-path 250ms linear;
+
+    @media screen and (min-width: $mobile) {
+      display: unset;
+    }
 
     &.hovered {
-      width: 35px;
-      height: 35px;
-      transform: translateX(-5px);
+      background: $accent-text-color;
     }
   }
 }

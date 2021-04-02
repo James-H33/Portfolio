@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 export class BrowserService {
   public browserDetails = new Subject();
   public windowSizeEvent = new Subject();
+  // public maxScrollablePositions = 5;
 
   constructor(
     @Inject('Window') private windowRef: Window,

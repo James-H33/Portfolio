@@ -37,8 +37,10 @@ export class AppComponent implements OnInit {
     'Javascript - Angular - Docker'
   ];
 
+  public maxPosition = 4;
+
   public get isTextSliderActive(): boolean {
-    return this.sliderPosition > 0 && this.sliderPosition < 4;
+    return this.sliderPosition > 0 && this.sliderPosition < this.maxPosition;
   }
 
   constructor(
@@ -65,7 +67,7 @@ export class AppComponent implements OnInit {
       const lastPosition = this.sliderPosition;
       this.sliderPosition = position;
 
-      if (this.isTextSliderActive && lastPosition !== 0) {
+      if (this.isTextSliderActive && lastPosition !== 0 && lastPosition !== this.maxPosition) {
         if (this.sliderPosition > lastPosition) {
           this.slideDirection.next(ScrollDirection.Down);
         } else {

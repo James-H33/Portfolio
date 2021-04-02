@@ -1,7 +1,7 @@
 <ng-container *ngIf="openInNewTab">
-  <a [href]="link" target="_blank"><ng-content></ng-content></a>
+  <a [href]="link" target="_blank" appCursorHover><ng-content></ng-content></a>
 </ng-container>
 
 <ng-container *ngIf="!openInNewTab">
-  <a [href]="link"><ng-content></ng-content></a>
+  <a [href]="link" appCursorHover><ng-content></ng-content></a>
 </ng-container>
