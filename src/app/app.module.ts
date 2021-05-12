@@ -16,6 +16,7 @@ import { CursorDirective } from 'src/directives/cursor-hover.directive';
 import { CommonModule } from '@angular/common';
 import { ToastComponent } from 'src/components/toast/toast.component';
 import { ClipboardDirective } from 'src/directives/clip-board-copy.directive';
+import { InteractiveWaveComponent } from 'src/components/interactive-wave/interactive-wave.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ClipboardDirective } from 'src/directives/clip-board-copy.directive';
     WorkDetailComponent,
     TextSliderComponent,
     ToastComponent,
+    InteractiveWaveComponent,
 
     // Directives
     CursorDirective,
